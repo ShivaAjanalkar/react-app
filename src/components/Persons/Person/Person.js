@@ -1,26 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import classes from './Person.css';
+import Aux from '../../../hoc/Auxiliary';
+import withClass from '../../../hoc/withClass';
 
 class Person extends Component {
   // static getDerivedStateFromProps(props, state) {
   //   console.log('[Persons.js] getDerivedStateFromProps', props);
   //   return state;
   // }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[Persons.js] shouldComponentUpdate');
-    return true;
-  }
-
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log('[Persons.js] getSnapshotBeforeUpdate');
-    return { message: 'Snapshot!' };
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('[Persons.js] componentDidUpdate');
-    console.log(snapshot);
-  }
 
   render() {
     // const style = {
@@ -35,15 +22,15 @@ class Person extends Component {
     // }
     console.log('[Person.js] rendering...');
     return (
-      <div className={classes.Person}>
+      <Aux>
         <p onClick={this.props.click}>
           I'm {this.props.name} and I am {this.props.age} years old!
         </p>
         <p>{this.props.children}</p>
         <input type="text" onChange={this.props.changed} value={this.props.name} />
-      </div>
+      </Aux>
     );
   }
 }
 
-export default Person;
+export default withClass(Person, classes.Person);

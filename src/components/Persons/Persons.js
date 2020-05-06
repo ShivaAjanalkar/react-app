@@ -1,7 +1,34 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Prs from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
+  componentWillUnmount() {
+    console.log('[Persons.js] componentWillUnmount');
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[Persons.js] shouldComponentUpdate');
+  //   if (
+  //     nextProps.persons !== this.props.persons ||
+  //     nextProps.changed !== this.props.changed ||
+  //     nextProps.clicked !== this.props.clicked
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('[Persons.js] getSnapshotBeforeUpdate');
+    return { message: 'Snapshot!' };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('[Persons.js] componentDidUpdate');
+    console.log(snapshot);
+  }
+
   render() {
     console.log('[Persons.js] rendering...');
     return this.props.persons.map((person, index) => {
